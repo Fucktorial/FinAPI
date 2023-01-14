@@ -13,3 +13,7 @@ def root():
 def main():
     return {'message': 'meowWwWw...'}
 
+
+@app.get('/db')
+def main():
+    return {'message': 'db task'}
