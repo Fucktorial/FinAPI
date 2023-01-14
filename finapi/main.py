@@ -2,4 +2,4 @@ import fastapi
 
 
 def run():
-    print('Hi')
+    print('Hello')
