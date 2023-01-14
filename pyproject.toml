@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "FinAPI"
+version = "0.1.0"
+description = ""
+authors = ["Bekbolot <riserlarenss@gmail.com>"]
+readme = "README.md"
+packages = [{include = "finapi"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.89.1"
+pytest = "^7.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+somecommand = "finapi.main:run"
