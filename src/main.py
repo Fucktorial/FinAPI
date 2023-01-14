@@ -16,4 +16,4 @@ def main():
 
 @app.get('/db-task')
 def main():
-    return {'message': 'db task'}
+    return {'message': 'db-task'}
