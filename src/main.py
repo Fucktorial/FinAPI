@@ -14,6 +14,6 @@ def main():
     return {'message': 'meowWwWw...'}
 
 
-@app.get('/db')
+@app.get('/db-task')
 def main():
     return {'message': 'db task'}
