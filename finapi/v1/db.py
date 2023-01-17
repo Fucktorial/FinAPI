@@ -1,5 +1,4 @@
 from sqlalchemy import (
-    create_engine,
     Column,
     ForeignKey,
     Integer,
@@ -9,23 +8,11 @@ from sqlalchemy import (
     FLOAT,
 )
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Session, relationship
+from sqlalchemy.orm import relationship
 
 from enum import Enum
 from datetime import datetime
 
-engine = create_engine("postgresql://Admin:Admin@localhost:5432/fast_api_db")
-Base = declarative_base()
-
-
-class SessionLocal(Session):
-    def __init__(self):
-        super().__init__(bind=engine)
-
-
-def get_db():
-    return SessionLocal()
 
 
 class Gender(Enum):
