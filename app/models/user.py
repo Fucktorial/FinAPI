@@ -1,20 +1,41 @@
-from sqlalchemy import Integer, String, Column, Boolean, Time
+from enum import Enum
+
+from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
 from app.db.base_class import Base
-from app.db.models import (
-    Gender,
-    Wallet
-)
+from app.models.relations import UserGroupRelation, UserWalletRelation
+
+
+class Gender(str, Enum):
+    __tablename__ = "genders"
+
+    FEMALE = "FEMALE"
+    MALE = "MALE"
+    OTHER = "OTHER"
+
 
 class User(Base):
+    __tablename__ = "users"
+
     id = Column(Integer, primary_key=True)
     username = Column(String(30))
-    second_name = Column(String(30))
+    secondname = Column(String(30))
     lastname = Column(String(30))
     gender = Column(Enum(Gender), default=Gender.MALE.value)
-    registration_date = Column(TIMESTAMP, default=datetime.now(timezone="UTC"))
+    registration_date = Column(DateTime, default=func.now(), nullable=False)
     phone_number = Column(String(12))
-    email = Column(TEXT)
-    wallet = relationship("Wallet", secondary="User_wallet", back_populates="user_wallet")
-    group = relationship("Group", secondary="Group_user", back_populates="user_group")
+    email = Column(String)
+    wallet = relationship(
+        "Wallet",
+        secondary=UserWalletRelation,
+        back_populates="user_wallets",
+        cascade="all, delete",
+    )
+    group = relationship(
+        "Group",
+        secondary=UserGroupRelation,
+        back_populates="user_groups",
+        cascade="all, delete",
+    )
