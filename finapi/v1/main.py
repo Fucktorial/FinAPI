@@ -4,16 +4,16 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get('/')
+@app.get("/")
 def root():
-    return {'message': 'root'}
+    return {"message": "root"}
 
 
-@app.get('/ksksksks')
+@app.get("/ksksksks")
 def main():
-    return {'message': 'meowWwWw...'}
+    return {"message": "meowWwWw..."}
 
 
-@app.get('/db-task')
+@app.get("/db-task")
 def main():
-    return {'message': 'db-task'}
+    return {"message": "db-task"}

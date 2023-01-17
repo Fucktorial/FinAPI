@@ -1,4 +1,13 @@
-from sqlalchemy import create_engine, Column, ForeignKey, Integer, VARCHAR, TIMESTAMP, TEXT, FLOAT
+from sqlalchemy import (
+    create_engine,
+    Column,
+    ForeignKey,
+    Integer,
+    VARCHAR,
+    TIMESTAMP,
+    TEXT,
+    FLOAT,
+)
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, relationship
@@ -18,15 +27,16 @@ class SessionLocal(Session):
 def get_db():
     return SessionLocal()
 
+
 class Gender(Enum):
-    FEMALE = 'FEMALE'
-    MALE = 'MALE'
+    FEMALE = "FEMALE"
+    MALE = "MALE"
 
 
 class Group(Base):
     id = Column(Integer, primary_key=True)
     name = Column(VARCHAR(30))
-    user_group = relationship('User', secondary='Group_user', back_populates='group')
+    user_group = relationship("User", secondary="Group_user", back_populates="group")
 
 
 class Wallet_types(Base):
@@ -38,7 +48,7 @@ class Wallet(Base):
     id = Column(Integer, primary_key=True)
     id_type = Column(Integer, ForeignKey(Wallet_types.id))
     name = Column(VARCHAR(30))
-    user_wallet = relationship('User', secondary='User_wallet', back_populates='wallet')
+    user_wallet = relationship("User", secondary="User_wallet", back_populates="wallet")
 
 
 class Categories(Base):
@@ -58,11 +68,11 @@ class User(Base):
     second_name = Column(VARCHAR(30))
     lastname = Column(VARCHAR(30))
     gender = Column(Enum(Gender), default=Gender.MALE.value)
-    registration_date = Column(TIMESTAMP, default=datetime.now(timezone='UTC'))
+    registration_date = Column(TIMESTAMP, default=datetime.now(timezone="UTC"))
     phone_number = Column(VARCHAR(12))
     email = Column(TEXT)
-    wallet = relationship(Wallet, secondary='User_wallet', back_populates='user_wallet')
-    group = relationship(Wallet, secondary='Group_user', back_populates='user_group')
+    wallet = relationship(Wallet, secondary="User_wallet", back_populates="user_wallet")
+    group = relationship(Wallet, secondary="Group_user", back_populates="user_group")
 
 
 class User_wallet(Base):

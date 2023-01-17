@@ -34,9 +34,9 @@ class User(BaseModel):
     phone_number: str(max_length=12)
     email: EmailStr
 
-    @validator('phone_number')
+    @validator("phone_number")
     def phone_validator(cls, value):
         re_expression = r"/^(\+7|8)(9{1})(\d{9})/"
         if not re.match(re_expression, value):
-            raise ValueError('Неверных формат номера телефона')
+            raise ValueError("Неверных формат номера телефона")
         return value
