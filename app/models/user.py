@@ -14,18 +14,19 @@ class Gender(str, Enum):
     FEMALE = "FEMALE"
     MALE = "MALE"
     OTHER = "OTHER"
-
+    UNDEFINED = "UNDEFINED"
+    
 
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    username = Column(String(30))
-    secondname = Column(String(30))
-    lastname = Column(String(30))
-    gender = Column(Enum(Gender), default=Gender.MALE.value)
+    username = Column(String(30), nullable=False)
+    secondname = Column(String(30), nullable=True)
+    lastname = Column(String(30), nullable=True)
+    gender = Column(Enum(Gender), default=Gender.UNDEFINED.value)
     registration_date = Column(DateTime, default=func.now(), nullable=False)
-    phone_number = Column(String(12))
+    phone_number = Column(String(12), nullable=False)
     email = Column(String)
     wallet = relationship(
         "Wallet",
